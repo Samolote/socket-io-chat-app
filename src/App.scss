@@ -1,0 +1,17 @@
+.messages-list {
+  display: flex;
+  flex-flow: column;
+  padding: 0;
+
+  &__element {
+    list-style-type: none;
+
+    &--incoming {
+      align-self: flex-start;
+    }
+
+    &--outgoing {
+      align-self: flex-end;
+    }
+  }
+}
