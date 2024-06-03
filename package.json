@@ -1,5 +1,5 @@
 {
-  "name": "websockets-chat",
+  "name": "socket-io-chat-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
