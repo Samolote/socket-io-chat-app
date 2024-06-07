@@ -1,6 +1,19 @@
+import { useEffect } from 'react';
+import { io } from 'socket.io-client';
 import './App.scss';
 
+const URL = 'http://localhost:4000';
+
+const socket = io(URL, { autoConnect: false });
+
 const App = () => {
+  useEffect(() => {
+    socket.connect();
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <main className="container">
       <header>
