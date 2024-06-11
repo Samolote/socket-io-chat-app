@@ -2,7 +2,7 @@ import express from 'express';
 import ViteExpress from 'vite-express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import { SOCKET_IO_EVENTS } from './SOCKET_IO_EVENTS';
+import { SocketIoEvents } from './events';
 
 const PORT = 4000;
 
@@ -10,10 +10,10 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
-io.on(SOCKET_IO_EVENTS.CONNECT, (socket) => {
-  console.log('a user connected: ' + socket.id);
-  socket.on(SOCKET_IO_EVENTS.DISCONNECT, () => {
-    console.log('user disconnected: ' + socket.id);
+io.on(SocketIoEvents.CONNECT, (socket) => {
+  console.log(`a user connected: ${socket.id}`);
+  socket.on(SocketIoEvents.DISCONNECT, () => {
+    console.log(`user disconnected: ${socket.id}`);
   });
 });
 
