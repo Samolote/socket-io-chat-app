@@ -15,6 +15,9 @@ io.on(SocketIoEvents.CONNECT, (socket) => {
   socket.on(SocketIoEvents.DISCONNECT, () => {
     console.log(`user disconnected: ${socket.id}`);
   });
+  socket.on(SocketIoEvents.SEND_MESSAGE, (data) => {
+    io.emit(SocketIoEvents.BROADCAST_MESSAGE, data);
+  });
 });
 
 httpServer.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
