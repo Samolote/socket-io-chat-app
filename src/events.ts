@@ -6,4 +6,5 @@ export enum SocketIoEvents {
   JOIN_CHANNEL = 'joinChannel',
   LEAVE_CHANNEL = 'leaveChannel',
   SEND_MESSAGE = 'sendMessage',
+  BROADCAST_MESSAGE = 'broadcastMessage',
 }
