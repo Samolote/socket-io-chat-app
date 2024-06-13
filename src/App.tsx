@@ -2,6 +2,15 @@ import { FormEvent, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import { SocketIoEvents } from './events';
 import './App.scss';
+import { Message } from './components/Message';
+
+/**
+ * @todos
+ * 1. Implement a form or modal containing a form for setting up a username
+ * 2. Implement list of active users
+ * 3. Implement chatrooms
+ * 4. MAKE THE CODE CLEEEEEEEEAN bcs rn it fugly
+ */
 
 const URL = 'http://localhost:4000';
 
@@ -20,7 +29,7 @@ type MessageType = { message: string; socketId: string; messageId: string };
 const App = () => {
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const localId = socket.id;
+  const { id: localId } = socket;
 
   useEffect(() => {
     socket.connect();
@@ -45,10 +54,11 @@ const App = () => {
         payload: { message, socketId: socket.id, messageId: `${socket.id}${Math.random()}` },
       });
     }
-    /** @todo
+
+    /**
+     * @todo
      * Figure out how to make messages be emitted with such syntax
      * so that the payload is typed both for app and server
-     *
      * emit<SendMessageEventType>(SocketIoEvents.SEND_MESSAGE, { payload: { message } });
      */
 
@@ -61,17 +71,13 @@ const App = () => {
         <h2>socket.io chat app</h2>
       </header>
       <ul className="messages-list">
-        {messages.map(({ message, socketId, messageId }) =>
-          socketId !== localId ? (
-            <li key={messageId} className="messages-list__element messages-list__element--incoming">
-              <article>{message}</article>
-            </li>
-          ) : (
-            <li key={messageId} className="messages-list__element messages-list__element--outgoing">
-              <article>{message}</article>
-            </li>
-          ),
-        )}
+        {messages.map(({ message, socketId, messageId }) => (
+          <Message
+            key={messageId}
+            text={message}
+            type={socketId !== localId ? 'incoming' : 'outgoing'}
+          />
+        ))}
       </ul>
       <form onSubmit={(e) => handleSendMessage(e)}>
         <fieldset role="group">
