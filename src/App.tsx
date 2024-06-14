@@ -1,8 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+
+import { MessagesList } from './components/MessagesList';
+import type { MessageType } from './components/Message';
+
 import { SocketIoEvents } from './events';
+
 import './App.scss';
-import { Message } from './components/Message';
 
 /**
  * @todos
@@ -23,8 +27,6 @@ type MessagePayloadType = {
     messageId: string;
   };
 };
-
-type MessageType = { message: string; socketId: string; messageId: string };
 
 const App = () => {
   const [message, setMessage] = useState<string>('');
@@ -70,15 +72,7 @@ const App = () => {
       <header>
         <h2>socket.io chat app</h2>
       </header>
-      <ul className="messages-list">
-        {messages.map(({ message, socketId, messageId }) => (
-          <Message
-            key={messageId}
-            text={message}
-            type={socketId !== localId ? 'incoming' : 'outgoing'}
-          />
-        ))}
-      </ul>
+      <MessagesList localId={typeof localId === 'string' ? localId : ''} messages={messages} />
       <form onSubmit={(e) => handleSendMessage(e)}>
         <fieldset role="group">
           <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
