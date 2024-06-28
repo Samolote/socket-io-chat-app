@@ -26,6 +26,15 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEve
   },
 );
 
+io.use((socket, next) => {
+  const username = socket.handshake.auth.username;
+  if (typeof username !== 'string') {
+    return next(new Error('invalid username'));
+  }
+  socket.data.username = username;
+  next();
+});
+
 io.on(SocketIoEvents.CONNECT, (socket) => {
   console.log(`a user connected: ${socket.id}`);
   socket.on(SocketIoEvents.DISCONNECT, () => {
