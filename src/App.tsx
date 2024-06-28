@@ -8,6 +8,7 @@ import socket from './socket';
 import { SocketIoEvents } from './events';
 
 import './App.scss';
+import { Modal } from './components/Modal';
 
 /**
  * @todos
@@ -20,11 +21,17 @@ import './App.scss';
 const App = () => {
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
+  const [isUsernameSelected, setIsUsernameSelected] = useState(false);
   const { id: localId } = socket;
 
   useEffect(() => {
-    socket.connect();
+    socket.on(SocketIoEvents.CONNECT_ERROR, (error) => {
+      if (error.message === 'invalid username') {
+        setIsUsernameSelected(false);
+      }
+    });
     return () => {
+      socket.off(SocketIoEvents.CONNECT_ERROR);
       socket.disconnect();
     };
   }, []);
@@ -59,6 +66,7 @@ const App = () => {
           <button>Send</button>
         </fieldset>
       </form>
+      {!isUsernameSelected ? <Modal setIsUsernameSelected={setIsUsernameSelected} /> : null}
     </main>
   );
 };

@@ -1,4 +1,15 @@
-import { useCallback, useEffect, useState, MouseEvent, ChangeEvent, FormEvent } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useState,
+  MouseEvent,
+  ChangeEvent,
+  FormEvent,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+
+import socket from '../socket';
 
 const MODAL_ANIMATION_DURATION = 400;
 const MODAL_CLASSES = {
@@ -6,10 +17,14 @@ const MODAL_CLASSES = {
   closing: 'modal-is-closing',
 };
 
-export const Modal = () => {
+type PropsType = {
+  setIsUsernameSelected: Dispatch<SetStateAction<boolean>>;
+};
+
+export const Modal = ({ setIsUsernameSelected }: PropsType) => {
   const htmlTag = document.querySelector('html');
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
 
   const handleClose = useCallback(() => {
     if (htmlTag) {
@@ -38,14 +53,15 @@ export const Modal = () => {
   };
 
   const handleOnChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    console.log(value);
-    setUserName(value);
+    setUsername(value);
   };
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (userName.trim()) {
-      localStorage.setItem('userName', userName);
+    if (username.trim()) {
+      setIsUsernameSelected(true);
+      socket.auth = { username };
+      socket.connect();
       handleClose();
     }
   };
