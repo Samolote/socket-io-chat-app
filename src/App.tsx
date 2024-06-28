@@ -17,14 +17,6 @@ import './App.scss';
  * 4. MAKE THE CODE CLEEEEEEEEAN bcs rn it fugly
  */
 
-type MessagePayloadType = {
-  payload: {
-    message: string;
-    socketId: string;
-    messageId: string;
-  };
-};
-
 const App = () => {
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -38,29 +30,20 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    socket.on(
-      SocketIoEvents.BROADCAST_MESSAGE,
-      ({ payload: { message, socketId, messageId } }: MessagePayloadType) => {
-        setMessages([...messages, { message, socketId, messageId }]);
-      },
-    );
+    socket.on(SocketIoEvents.BROADCAST_MESSAGE, ({ message, socketId, messageId }) => {
+      setMessages([...messages, { message, socketId, messageId }]);
+    });
   }, [messages]);
 
   const handleSendMessage = (e: FormEvent) => {
     e.preventDefault();
-    if (message.trim()) {
+    if (message.trim() && typeof socket.id === 'string') {
       socket.emit(SocketIoEvents.SEND_MESSAGE, {
-        payload: { message, socketId: socket.id, messageId: `${socket.id}${Math.random()}` },
+        message,
+        socketId: socket.id,
+        messageId: `${socket.id}${Math.random()}`,
       });
     }
-
-    /**
-     * @todo
-     * Figure out how to make messages be emitted with such syntax
-     * so that the payload is typed both for app and server
-     * emit<SendMessageEventType>(SocketIoEvents.SEND_MESSAGE, { payload: { message } });
-     */
-
     setMessage('');
   };
 
