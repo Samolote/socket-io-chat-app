@@ -4,11 +4,17 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { SocketIoEvents } from './events';
 
-const PORT = 4000;
+const PROTOCOL = 'http';
+const URL = 'localhost';
+const PORT = 8080;
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: `${PROTOCOL}://${URL}:${PORT}`,
+  },
+});
 
 io.on(SocketIoEvents.CONNECT, (socket) => {
   console.log(`a user connected: ${socket.id}`);

@@ -1,9 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
 
 import { MessagesList } from './components/MessagesList';
+
 import type { MessageType } from './components/Message';
 
+import socket from './socket';
 import { SocketIoEvents } from './events';
 
 import './App.scss';
@@ -15,10 +16,6 @@ import './App.scss';
  * 3. Implement chatrooms
  * 4. MAKE THE CODE CLEEEEEEEEAN bcs rn it fugly
  */
-
-const URL = 'http://localhost:4000';
-
-const socket = io(URL, { autoConnect: false });
 
 type MessagePayloadType = {
   payload: {
