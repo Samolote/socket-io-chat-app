@@ -28,7 +28,7 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEve
 
 io.use((socket, next) => {
   const username = socket.handshake.auth.username;
-  if (typeof username !== 'string') {
+  if (typeof username !== 'string' || (typeof username === 'string' && username.length === 0)) {
     return next(new Error('invalid username'));
   }
   socket.data.username = username;
