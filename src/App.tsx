@@ -43,11 +43,11 @@ const App = () => {
 
   const handleSendMessage = (e: FormEvent) => {
     e.preventDefault();
-    if (message.trim() && typeof socket.id === 'string') {
+    if (message.trim() && typeof localId === 'string') {
       socket.emit(SocketIoEvents.SEND_MESSAGE, {
         message,
-        socketId: socket.id,
-        messageId: `${socket.id}${Math.random()}`,
+        socketId: localId,
+        messageId: `${localId}${Math.random()}`,
       });
     }
     setMessage('');
