@@ -1,14 +1,15 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { MessagesList } from './components/MessagesList';
+import { MessageForm } from './components/MessageForm';
+import { Modal } from './components/Modal';
 
 import type { MessageType } from './components/Message';
 
-import socket from './utilities/socket';
 import { SocketIoEvents } from './utilities/events';
+import socket from './utilities/socket';
 
 import './App.scss';
-import { Modal } from './components/Modal';
 
 /**
  * @todos
@@ -18,7 +19,6 @@ import { Modal } from './components/Modal';
  */
 
 const App = () => {
-  const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [isUsernameSelected, setIsUsernameSelected] = useState(false);
   const { id: localId } = socket;
@@ -41,30 +41,13 @@ const App = () => {
     });
   }, [messages]);
 
-  const handleSendMessage = (e: FormEvent) => {
-    e.preventDefault();
-    if (message.trim() && typeof localId === 'string') {
-      socket.emit(SocketIoEvents.SEND_MESSAGE, {
-        message,
-        socketId: localId,
-        messageId: `${localId}${Math.random()}`,
-      });
-    }
-    setMessage('');
-  };
-
   return (
     <main className="container">
       <header>
         <h2>socket.io chat app</h2>
       </header>
       <MessagesList localId={typeof localId === 'string' ? localId : ''} messages={messages} />
-      <form onSubmit={(e) => handleSendMessage(e)}>
-        <fieldset role="group">
-          <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
-          <button>Send</button>
-        </fieldset>
-      </form>
+      <MessageForm />
       {!isUsernameSelected ? <Modal setIsUsernameSelected={setIsUsernameSelected} /> : null}
     </main>
   );
