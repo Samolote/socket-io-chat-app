@@ -1,13 +1,13 @@
 export enum SocketIoEvents {
   CONNECT = 'connection',
   DISCONNECT = 'disconnect',
-  CONNECT_ERROR = 'connectError',
-  CREATE_CHANNEL = 'createChannel',
-  REMOVE_CHANNEL = 'removeChannel',
-  JOIN_CHANNEL = 'joinChannel',
-  LEAVE_CHANNEL = 'leaveChannel',
-  SEND_MESSAGE = 'sendMessage',
-  BROADCAST_MESSAGE = 'broadcastMessage',
+  CONNECT_ERROR = 'connect_error',
+  CREATE_CHANNEL = 'create_channel',
+  REMOVE_CHANNEL = 'remove_channel',
+  JOIN_CHANNEL = 'join_channel',
+  LEAVE_CHANNEL = 'leave_channel',
+  SEND_MESSAGE = 'send_message',
+  BROADCAST_MESSAGE = 'broadcast_message',
 }
 
 type MessagePayloadType = {
