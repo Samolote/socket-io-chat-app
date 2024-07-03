@@ -8,8 +8,8 @@ import {
   type ServerToClientEvents,
   type ClientToServerEvents,
   type InterServerEvents,
-} from './events';
-import { type SocketData } from './socket';
+} from '../utilities/events';
+import { type SocketData } from '../utilities/socket';
 
 const PROTOCOL = 'http';
 const URL = 'localhost';

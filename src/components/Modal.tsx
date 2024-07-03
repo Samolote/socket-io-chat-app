@@ -9,7 +9,7 @@ import {
   SetStateAction,
 } from 'react';
 
-import socket from '../socket';
+import socket from '../utilities/socket';
 
 const MODAL_ANIMATION_DURATION = 400;
 const MODAL_CLASSES = {
@@ -74,7 +74,7 @@ export const Modal = ({ setIsUsernameSelected }: PropsType) => {
   }, [handleEscapeKey]);
 
   return (
-    <dialog open={isModalOpen} onClick={(e) => handleOverlayClick(e)}>
+    <dialog open={isModalOpen} onClick={handleOverlayClick}>
       <article>
         <header>
           <button aria-label="Close" rel="prev" onClick={handleClose} />

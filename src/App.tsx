@@ -4,18 +4,17 @@ import { MessagesList } from './components/MessagesList';
 
 import type { MessageType } from './components/Message';
 
-import socket from './socket';
-import { SocketIoEvents } from './events';
+import socket from './utilities/socket';
+import { SocketIoEvents } from './utilities/events';
 
 import './App.scss';
 import { Modal } from './components/Modal';
 
 /**
  * @todos
- * 1. Implement a form or modal containing a form for setting up a username
- * 2. Implement list of active users
- * 3. Implement chatrooms
- * 4. MAKE THE CODE CLEEEEEEEEAN bcs rn it fugly
+ * 1. Implement list of active users
+ * 2. Implement chatrooms
+ * 3. MAKE THE CODE CLEEEEEEEEAN bcs rn it fugly
  */
 
 const App = () => {
