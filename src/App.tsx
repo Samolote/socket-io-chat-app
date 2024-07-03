@@ -4,8 +4,6 @@ import { MessagesList } from './components/MessagesList';
 import { MessageForm } from './components/MessageForm';
 import { Modal } from './components/Modal';
 
-import type { MessageType } from './components/Message';
-
 import { SocketIoEvents } from './utilities/events';
 import socket from './utilities/socket';
 
@@ -19,9 +17,7 @@ import './App.scss';
  */
 
 const App = () => {
-  const [messages, setMessages] = useState<MessageType[]>([]);
   const [isUsernameSelected, setIsUsernameSelected] = useState(false);
-  const { id: localId } = socket;
 
   useEffect(() => {
     socket.on(SocketIoEvents.CONNECT_ERROR, (error) => {
@@ -35,18 +31,12 @@ const App = () => {
     };
   }, []);
 
-  useEffect(() => {
-    socket.on(SocketIoEvents.BROADCAST_MESSAGE, ({ message, socketId, messageId }) => {
-      setMessages([...messages, { message, socketId, messageId }]);
-    });
-  }, [messages]);
-
   return (
     <main className="container">
       <header>
         <h2>socket.io chat app</h2>
       </header>
-      <MessagesList localId={typeof localId === 'string' ? localId : ''} messages={messages} />
+      <MessagesList />
       <MessageForm />
       {!isUsernameSelected ? <Modal setIsUsernameSelected={setIsUsernameSelected} /> : null}
     </main>
