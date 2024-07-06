@@ -8,4 +8,6 @@ export default {
     '^.+\\.svg$': 'jest-transformer-svg',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  coverageReporters: ['text'],
+  collectCoverageFrom: ['src/components/**/*.{ts,tsx}', 'src/utilities/*.ts', '!src/**/index.ts'],
 };
