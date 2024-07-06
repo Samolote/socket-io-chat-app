@@ -9,7 +9,7 @@ import {
   SetStateAction,
 } from 'react';
 
-import socket from '../utilities/socket';
+import { socket } from '@/utilities';
 
 const MODAL_ANIMATION_DURATION = 400;
 const MODAL_CLASSES = {
@@ -21,7 +21,7 @@ type PropsType = {
   setIsUsernameSelected: Dispatch<SetStateAction<boolean>>;
 };
 
-export const Modal = ({ setIsUsernameSelected }: PropsType) => {
+const Modal = ({ setIsUsernameSelected }: PropsType) => {
   const htmlTag = document.querySelector('html');
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [username, setUsername] = useState('');
@@ -90,3 +90,5 @@ export const Modal = ({ setIsUsernameSelected }: PropsType) => {
     </dialog>
   );
 };
+
+export default Modal;

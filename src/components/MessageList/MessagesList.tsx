@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Message, type MessageType } from '../components/Message';
+import { Message, type MessageType } from '@/components';
+import { socket, SocketIoEvents } from '@/utilities';
 
-import socket from '../utilities/socket';
-import { SocketIoEvents } from '../utilities/events';
-
-export const MessagesList = () => {
+const MessagesList = () => {
   const { id } = socket;
   const [messages, setMessages] = useState<MessageType[]>([]);
 
@@ -22,3 +20,5 @@ export const MessagesList = () => {
     </ul>
   );
 };
+
+export default MessagesList;

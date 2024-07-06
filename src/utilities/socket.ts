@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { ServerToClientEvents, ClientToServerEvents } from './events';
+import { ServerToClientEvents, ClientToServerEvents } from '@/utilities';
 
 export type SocketData = {
   username: string;

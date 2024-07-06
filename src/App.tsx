@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
-
-import { MessagesList } from './components/MessagesList';
-import { MessageForm } from './components/MessageForm';
-import { Modal } from './components/Modal';
-
-import { SocketIoEvents } from './utilities/events';
-import socket from './utilities/socket';
+import { MessagesList, MessageForm, Modal } from '@/components';
+import { socket, SocketIoEvents } from '@/utilities';
 
 import './App.scss';
 
@@ -14,6 +9,7 @@ import './App.scss';
  * 1. Implement list of active users
  * 2. Implement chatrooms
  * 3. MAKE THE CODE CLEEEEEEEEAN bcs rn it fugly
+ * 4. Show user a visual cue if invalid username was given
  */
 
 const App = () => {

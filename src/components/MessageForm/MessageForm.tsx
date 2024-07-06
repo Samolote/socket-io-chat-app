@@ -1,8 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { SocketIoEvents } from '../utilities/events';
-import socket from '../utilities/socket';
+import { socket, SocketIoEvents } from '@/utilities';
 
-export const MessageForm = () => {
+const MessageForm = () => {
   const { id } = socket;
 
   const [message, setMessage] = useState<string>('');
@@ -32,3 +31,5 @@ export const MessageForm = () => {
     </form>
   );
 };
+
+export default MessageForm;

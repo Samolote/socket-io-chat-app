@@ -5,10 +5,12 @@ type PropsType = {
   text: string;
 };
 
-export const Message = ({ type, text }: PropsType) => {
+const Message = ({ type, text }: PropsType) => {
   return (
     <li className={`messages-list__element messages-list__element--${type}`}>
       <article>{text}</article>
     </li>
   );
 };
+
+export default Message;
