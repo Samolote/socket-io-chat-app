@@ -22,10 +22,10 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Absolute imports */
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@/components": ["./components"],
-      "@/utilities": ["./utilities"]
+      "@/components": ["src/components"],
+      "@/utilities": ["src/utilities"]
     }
   },
   "include": ["src", "./jest.setup.ts"],
