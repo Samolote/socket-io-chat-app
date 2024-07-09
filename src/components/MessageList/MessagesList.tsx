@@ -1,16 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Message, type MessageType } from '@/components';
-import { socket, SocketIoEvents } from '@/utilities';
+import { Message } from '@/components';
+import { useMessages } from './useMessages';
+import { socket } from '@/utilities';
 
 const MessagesList = () => {
   const { id } = socket;
-  const [messages, setMessages] = useState<MessageType[]>([]);
-
-  useEffect(() => {
-    socket.on(SocketIoEvents.BROADCAST_MESSAGE, ({ message, socketId, messageId }) => {
-      setMessages([...messages, { message, socketId, messageId }]);
-    });
-  }, [messages]);
+  const messages = useMessages();
 
   return (
     <ul className="messages-list">
