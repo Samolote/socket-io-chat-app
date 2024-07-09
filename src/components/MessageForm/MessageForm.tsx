@@ -14,8 +14,8 @@ const MessageForm = () => {
         socketId: id,
         messageId: `${id}${Math.random()}`,
       });
+      setMessage('');
     }
-    setMessage('');
   };
 
   const handleTextInput = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ const MessageForm = () => {
   return (
     <form onSubmit={handleSendMessage}>
       <fieldset role="group">
-        <input type="text" value={message} onChange={handleTextInput} />
+        <input type="text" aria-label="Chat input" value={message} onChange={handleTextInput} />
         <button>Send</button>
       </fieldset>
     </form>
