@@ -2,12 +2,12 @@ import { Message } from '@/components';
 import { useMessages } from './useMessages';
 import { socket } from '@/utilities';
 
-const MessagesList = () => {
+const MessageList = () => {
   const { id } = socket;
   const messages = useMessages();
 
   return (
-    <ul className="messages-list">
+    <ul className="message-list">
       {messages.map(({ message, socketId, messageId }) => (
         <Message key={messageId} text={message} type={socketId !== id ? 'incoming' : 'outgoing'} />
       ))}
@@ -15,4 +15,4 @@ const MessagesList = () => {
   );
 };
 
-export default MessagesList;
+export default MessageList;

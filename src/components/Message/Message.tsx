@@ -7,7 +7,7 @@ type PropsType = {
 
 const Message = ({ type, text }: PropsType) => {
   return (
-    <li className={`messages-list__element messages-list__element--${type}`}>
+    <li className={`message-list__element message-list__element--${type}`}>
       <article>{text}</article>
     </li>
   );
