@@ -11,5 +11,10 @@ export default {
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   coverageReporters: ['text'],
-  collectCoverageFrom: ['src/components/**/*.{ts,tsx}', 'src/utilities/*.ts', '!src/**/index.ts'],
+  collectCoverageFrom: [
+    'src/components/**/*.{ts,tsx}',
+    'src/utilities/*.ts',
+    '!src/**/index.ts',
+    '!src/components/**/use*.tsx',
+  ],
 };
