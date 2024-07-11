@@ -17,12 +17,12 @@ describe('MessageForm', () => {
     const user = userEvent.setup();
     render(<MessageForm />);
 
-    const input = screen.getByRole('textbox', { name: 'Chat input' });
+    const input = screen.getByRole('textbox', { name: /^chat input$/i });
 
     await user.type(input, mockMessage);
     expect(input).toHaveDisplayValue(mockMessage);
 
-    await user.click(screen.getByRole('button', { name: 'Send' }));
+    await user.click(screen.getByRole('button', { name: /^send$/i }));
     expect(socket.emit).toHaveBeenCalledTimes(1);
     expect(input).toHaveDisplayValue('');
   });
