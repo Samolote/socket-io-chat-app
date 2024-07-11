@@ -1,13 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-  MouseEvent,
-  ChangeEvent,
-  FormEvent,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import { useCallback, useState, ChangeEvent, FormEvent, Dispatch, SetStateAction } from 'react';
 
 import { socket } from '@/utilities';
 
@@ -36,22 +27,6 @@ const Modal = ({ setIsUsernameSelected }: PropsType) => {
     }
   }, [htmlTag]);
 
-  const handleEscapeKey = useCallback(
-    (e: KeyboardEvent) => {
-      if (!isModalOpen) return;
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    },
-    [handleClose, isModalOpen],
-  );
-
-  const handleOverlayClick = (e: MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      handleClose();
-    }
-  };
-
   const handleOnChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setUsername(value);
   };
@@ -66,23 +41,20 @@ const Modal = ({ setIsUsernameSelected }: PropsType) => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('keydown', handleEscapeKey);
-    return () => {
-      window.removeEventListener('keydown', handleEscapeKey);
-    };
-  }, [handleEscapeKey]);
-
   return (
-    <dialog open={isModalOpen} onClick={handleOverlayClick}>
+    <dialog open={isModalOpen}>
       <article>
         <header>
-          <button aria-label="Close" rel="prev" onClick={handleClose} />
           <h3>Set your username!</h3>
         </header>
         <form onSubmit={handleOnSubmit}>
           <fieldset role="group">
-            <input type="text" placeholder="Type something here..." onChange={handleOnChange} />
+            <input
+              type="text"
+              aria-label="Username input"
+              placeholder="Type something here..."
+              onChange={handleOnChange}
+            />
             <input type="submit" value={'Submit'} />
           </fieldset>
         </form>
