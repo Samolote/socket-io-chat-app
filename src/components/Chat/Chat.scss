@@ -1,0 +1,14 @@
+.chat {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  &__messages {
+    flex-grow: 1;
+  }
+
+  &__input {
+    flex-shrink: 0;
+    padding: 0 1rem;
+  }
+}

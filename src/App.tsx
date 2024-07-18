@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageList, MessageForm, Modal } from '@/components';
+import { Chat, MessageList, MessageForm, Modal } from '@/components';
 import { socket, SocketIoEvents } from '@/utilities';
 
 /**
@@ -31,10 +31,9 @@ const App = () => {
         <h2>socket.io chat app</h2>
       </header>
       <main>
-        <MessageList />
-        <MessageForm />
-        {!isUsernameSelected ? <Modal setIsUsernameSelected={setIsUsernameSelected} /> : null}
+        <Chat messageList={<MessageList />} messagesForm={<MessageForm />} />
       </main>
+      {!isUsernameSelected ? <Modal setIsUsernameSelected={setIsUsernameSelected} /> : null}
     </>
   );
 };
