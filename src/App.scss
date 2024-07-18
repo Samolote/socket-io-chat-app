@@ -1,0 +1,11 @@
+.chat-container {
+  display: flex;
+
+  &__content {
+    flex: 1;
+  }
+
+  &__users {
+    width: 240px;
+  }
+}
