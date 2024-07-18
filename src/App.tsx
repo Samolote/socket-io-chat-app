@@ -26,14 +26,16 @@ const App = () => {
   }, []);
 
   return (
-    <main className="container">
+    <>
       <header>
         <h2>socket.io chat app</h2>
       </header>
-      <MessageList />
-      <MessageForm />
-      {!isUsernameSelected ? <Modal setIsUsernameSelected={setIsUsernameSelected} /> : null}
-    </main>
+      <main>
+        <MessageList />
+        <MessageForm />
+        {!isUsernameSelected ? <Modal setIsUsernameSelected={setIsUsernameSelected} /> : null}
+      </main>
+    </>
   );
 };
 
