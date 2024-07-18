@@ -1,6 +1,8 @@
-import { Message } from '@/components';
 import { useMessages } from './useMessages';
 import { socket } from '@/utilities';
+import './MessagesList.scss';
+
+export type MessageType = { message: string; socketId: string; messageId: string };
 
 const MessageList = () => {
   const { id } = socket;
@@ -8,8 +10,14 @@ const MessageList = () => {
 
   return (
     <ul className="message-list">
-      {messages.map(({ message, socketId, messageId }) => (
-        <Message key={messageId} text={message} type={socketId !== id ? 'incoming' : 'outgoing'} />
+      {messages.map(({ message, socketId }) => (
+        <li
+          className={`message-list__element message-list__element--${
+            socketId !== id ? 'incoming' : 'outgoing'
+          }`}
+        >
+          <article>{message}</article>
+        </li>
       ))}
     </ul>
   );

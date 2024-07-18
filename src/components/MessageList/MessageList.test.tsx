@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import MessageList from './MessageList';
-import { type MessageType } from '../Message';
+import { type MessageType } from '../MessageList';
 import { useMessages } from './useMessages';
 
 jest.mock('./useMessages', (): { useMessages: () => MessageType[] } => ({

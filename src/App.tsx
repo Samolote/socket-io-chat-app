@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { MessageList, MessageForm, Modal } from '@/components';
 import { socket, SocketIoEvents } from '@/utilities';
 
-import './App.scss';
-
 /**
  * @todos
  * 1. Implement list of active users
